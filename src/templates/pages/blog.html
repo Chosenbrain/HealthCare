@@ -1,0 +1,83 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+
+{% block title %}Jazeera Blog{% endblock title %}
+
+{% block meta %} the best medical-service website in Abuja {% endblock meta %}
+{% block content %}
+
+     <br><p></p>
+<section class="ftco-section bg-light" id="blog-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Gets Every Single Updates Here</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+          </div>
+        </div>
+
+
+      <div class="container">
+         <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-lg-8 ftco-animate">
+           {% for blog in queryset %}
+            <h2 class="text-center">{{ blog.title }}</h2>
+            <div class="meta mb-3 text-center">
+           <div><h6><span><a href = "">written By {{ blog.doctor.doctor.username }}</span><small class="date"><i class="icon-clock"></i>  {{  blog.timestamp|timesince }} ago</small><a/></h6>
+           
+            </div>
+            </div>
+             <p class= "text-center"> 
+             <img src="{{ blog.thumbnail.url }}" alt="" class="img-fluid">
+             </p>
+             
+           <div><small class="icon-eye text-danger">{{ blog.view_count }}</small></div> 
+          {% for cat in blog.categories.all %}
+          <div class="text-center">
+          <h5><span class="btn btn-dark">{{ cat }}</span></h5>
+          </div>
+          {% endfor %}
+           <p class="text-center">{{ blog.overview }}</p>
+            {% endfor %}
+               
+            <nav aria-label="pagination">
+                <ul class="pagination pagination-circle pg-blue">
+                 {% if queryset.has_previous %}
+                <li class="page-item"><a href= "?{{ page_request_var }}={{ queryset.previous_page_number }}"  class="page-link">Previous</a></li>
+                 {% endif %}
+               
+                    <li class="page-item active"><a href= "?{{ page_request_var }}={{ queryset.number }}" class="page-link">{{ queryset.number }}</a></li>
+                   </a>
+                  </li>
+               {% if queryset.has_next %}
+              <li class="page-item"><a  href= "?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link">Next</a></li>
+                {% endif %}
+           </ul>
+           </nav>
+               {% if is_paginated %}
+              <nav aria-label="pagination">
+                <ul class="pagination pagination-circle pg-blue">
+                 {% if queryset.has_previous %}
+                <li class="page-item"><a href= "?{{ page_request_var }}={{ queryset.previous_page_number }}"  class="page-link">Previous</a></li>
+                 {% endif %}
+               
+                    <li class="page-item active"><a href= "?{{ page_request_var }}={{ queryset.number }}" class="page-link">{{ queryset.number }}</a></li>
+                   </a>
+                  </li>
+               {% if queryset.has_next %}
+              <li class="page-item"><a  href= "?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link">Next</a></li>
+                {% endif %}
+           </ul>
+           </nav>
+           {% endif %}
+            </div>
+            </div>
+        </div>
+      </div>
+    </section>
+		
+{% endblock content  %}
+
+  
+
