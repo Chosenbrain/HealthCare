@@ -10,17 +10,18 @@
 	  <br><p></p>	
     <br><p></p>
 	  <br><p></p>
-
+    
 <div class="content-section text-center">
-  <div class="media">
-    <img class="rounded-circle account-img" src="{{ doctor.image.url }}">
+  <div class="media img-responsive">
+    <img class="rounded-circle account-img" src="{{ image }}">
     <div class="media-body">
-      <h2 class="account-heading">{{ doctor.username }}</h2>
-      <p class="text-secondary">{{ doctor.email }}</p>
-      <p class="text-secondary">{{ doctor.speciality }}</p>
-      <p class="text-primary">{{ doctor.bio }}</p>
+      <h2 class="account-heading">{{ username }}</h2>
+      <p class="text-secondary">{{ email }}</p>
+      <p class="text-secondary">{{ speciality }}</p>
+      <p class="text-primary">{{ bio }}</p>
     </div>
   </div>
+
 <form method="POST" enctype="multipart/form-data">
          {% csrf_token %}
          <fieldset class="form-group">
