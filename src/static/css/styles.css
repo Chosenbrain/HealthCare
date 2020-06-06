@@ -13341,3 +13341,10 @@ a.badge-dark:focus {
     color: #fff;
     border: 1px solid transparent;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

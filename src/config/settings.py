@@ -31,8 +31,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
 
     # Local
-    'users',
-    'pages',
+    'users.apps.UsersConfig',
+    'pages.apps.PagesConfig',
 ]
 
 # MIDDLEWARE
@@ -119,13 +119,13 @@ USE_L10N = True
 USE_TZ = True
 
 
-# STATIC
-# ------------------------------------------------------------------------------
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-# https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
  
 # http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support

@@ -10,32 +10,37 @@
 	  <br><p></p>	
     <br><p></p>
 	  <br><p></p>
-    
-<div class="content-section text-center">
-  <div class="media img-responsive">
-    <img class="rounded-circle account-img" src="{{ image }}">
-    <div class="media-body">
-      <h2 class="account-heading">{{ username }}</h2>
-      <p class="text-secondary">{{ email }}</p>
-      <p class="text-secondary">{{ speciality }}</p>
-      <p class="text-primary">{{ bio }}</p>
+
+
+  <div class="media-body">
+  <legend class=" mb-4 h3 center text-center">{{ user.username }}</legend>
     </div>
-  </div>
-
-<form method="POST" enctype="multipart/form-data">
-         {% csrf_token %}
+  <div class="media">
+      <img class="center" style="width:300px;height:300px;" src="{{ user.profile.image.url }}">
+    </div>
+    <br> 
+      <div class="content-section text-center">
+      <div class="media-body">
+      <legend class="border-bottom mb-4 h4 center">My Specialities</legend>
+        <p class="text-info h6">{{ user.profile.speciality }}</p>
+        <br>
+        <legend class="border-bottom mb-4 h4 center">My Contact</legend>
+        <p class="text-danger h6">{{ user.email }}</p>
+    </div>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
          <fieldset class="form-group">
-             <legend class="border-bottom mb-4">Profile Info</legend>
-             {{ u_form|crispy }}
-             {{ p_form|crispy }}
+             <legend class="border-bottom mb-4 h4 center">My Bio</legend>
+           <p class="text-dark h6">{{ user.profile.bio }}</p>
          </fieldset>
-         <div class="form-group">
-             <button class="btn btn-outline-info" type="submit">Update</button>
-
+         <div class="form-group text-center center">
+         {{ u_form|crispy }}
+         {{ p_form|crispy }}
+          <button class="btn btn-outline-info" type="submit">Update</button>
          </div>
      </form>
+   
 </div>
-
-
+ 
 
 {% endblock content %}

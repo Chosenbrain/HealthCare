@@ -24,20 +24,18 @@
            {% for blog in queryset %}
             <h2 class="text-center">{{ blog.title }}</h2>
             <div class="meta mb-3 text-center">
-           <div><h6><span><a href = "">written By {{ blog.doctor.doctor.username }}</span><small class="date"><i class="icon-clock"></i>  {{  blog.timestamp|timesince }} ago</small><a/></h6>
+           <div><h6><span><a href = "">written By {{ blog.user }}</span>{{ blog.id }}  <small class="date"><i class="icon-clock"></i>  {{  blog.timestamp|timesince }} ago</small><a/></h6>
            
             </div>
             </div>
-             <p class= "text-center"> 
-             <img src="{{ blog.thumbnail.url }}" alt="" class="img-fluid">
-             </p>
-             
            <div><small class="icon-eye text-danger">{{ blog.view_count }}</small></div> 
-          {% for cat in blog.categories.all %}
-          <div class="text-center">
-          <h5><span class="btn btn-dark">{{ cat }}</span></h5>
+          
+          <div class="meta mb-3 text-center">
+          
+          <h5>{% for cat in blog.categories.all %}<span class="btn btn-dark">{{ cat }}</span> {% endfor %}</h5>
+          
           </div>
-          {% endfor %}
+         
            <p class="text-center">{{ blog.overview }}</p>
             {% endfor %}
                

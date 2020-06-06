@@ -15,5 +15,9 @@
   {{ form|crispy }}
   <button class="btn btn-success" type="submit">Sign up</button>
 </form>
+  <div class="border-top pt-3"></div>
+    <small class="text-muted">
+        Already Have an Account? <a class="ml-2" href="{% url 'account_login' %}">Sign In</a>
+    </small>
 </div>
 {% endblock content %}

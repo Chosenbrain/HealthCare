@@ -1,18 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .forms import UserUpdateForm,DoctorUpdateForm
 from .models import Doctor
+
+
+
 
 @login_required
 def profile(request):
-    doctor = Doctor.objects.all()
-    image = Doctor.objects.all()
-    email = Doctor.objects.all()
-    bio = Doctor.objects.all()
-    speciality = Doctor.objects.all()
-    context ={
-        'image':image,
-        'email':email,
-        'bio':bio,
-        'speciality':speciality
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = DoctorUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = DoctorUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
     }
     return render(request, 'pages/profile.html', context)
