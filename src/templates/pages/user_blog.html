@@ -1,0 +1,69 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+
+{% block title %}Jazeera Blog{% endblock title %}
+
+{% block meta %} the best medical-service website in Abuja {% endblock meta %}
+{% block content %}
+
+     <br><p></p>
+    
+ <section class="ftco-section bg-light" id="blog-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Gets Every Single Updates Here</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+          </div>
+        </div>
+   {% if user.doctor %}
+  <a class="btn btn-outline-danger center button" href="{% url 'blog-create' %}">Create a Blog</a>
+       {% else %}
+       {% endif %}
+       <br><p></p>
+        <div class="row d-flex">
+         <h1 class="mb-3 text-center"> {{ view.kwargs.username }} has {{ page_obj.paginator.count }} Post</h1>
+         {% for blog in blog_post %}
+          <div class="col-md-4 ftco-animate">
+            <div class="blog-entry "> 
+              <a href="{% url 'blog-detail' blog.id %}" class="block-20" style="background-image: url({{ blog.image.url }})"></a>
+              <div class="text d-block">
+              	<div class="meta mb-3">
+                  <div>{{ blog.timestamp|timesince }} ago</div>
+                  <div class="h5"><a href="{% url 'user-blog' blog.doctor.user.username %}"> Written By {{ blog.doctor.user.username }}</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-eye"></span>{{ blog.view_count }}</a></div>
+                </div>
+                <h3 class="heading"><a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a></h3>
+                <p>{{ blog.summary }}</p>
+                <p><a href="{% url 'blog-detail' blog.id %}" class="btn btn-primary py-2 px-3">Read more</a></p>
+              </div>
+            </div>
+        	</div>
+          {% endfor %}
+        </div> 
+      </div>
+    </section>
+    {% if is_paginated %}
+
+    {% if page_obj.has_previous %}
+    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+        <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-5' and num < page_obj.number|add:'5' %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+    {% endif %}
+    
+{% endblock content  %}

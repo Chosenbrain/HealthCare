@@ -1,22 +1,26 @@
 from django.views.generic import TemplateView
+from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.views.generic import (
+    ListView,
     DetailView,
     CreateView,
     UpdateView,
     DeleteView
 )
-from .models import Blog
-from users.models import Doctor
+from .models import Blog,Lab
+from users.models import Doctor,CustomUser
 
 
 
 
 class HomePageView(TemplateView):
+    
     template_name = 'pages/home.html'
 
 
@@ -48,35 +52,33 @@ def contact(request):
 
 
 def doctor(request):
-    return render(request, 'pages/doctor.html', {})
+    context = {
+        'doctor':Doctor.objects.all()
+        
+    }
+    return render(request, 'pages/doctor.html', context)
+
+
+
 
 
 def blog(request):
-    blog_post = Blog.objects.all()
-    ordering = ['-timestamp']
-    paginator = Paginator(blog_post, 2)
-    page_request_var = 'page'
-    page = request.GET.get(page_request_var)
-    try:
-        paginated_queryset = paginator.page(page)
-    except PageNotAnInteger:
-        paginated_queryset = paginator.page(2)
-    except EmptyPage:
-        paginated_queryset = paginator.page(paginator.num_pages) 
+    
     context = {
-        'queryset': paginated_queryset,
-        'page_request_var': page_request_var
-        
+        'blog_post': Blog.objects.all()
     }
-
     return render(request, 'pages/blog.html', context)
 
+class BlogListView(ListView):
+    model = Blog
+    template_name = 'pages/blog.html'  # <app>/<model>_<viewtype>.html
+    context_object_name = 'blog_post'
+    ordering = ['-timestamp']
+    paginate_by = 5
 
 
 class BlogDetailView(DetailView):
     model = Blog
-    template_name = 'pages/blog.html'
-    context_object_name = 'blog_post'
     
 
 
@@ -84,42 +86,62 @@ class BlogDetailView(DetailView):
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
-    fields = ['title', 'categories', 'overview']
+    fields = ['title', 'categories', 'overview', 'image', 'summary']
 
     def form_valid(self, form):
-        form.instance.user = Doctor.objects.get(user=self.request.user)
+        form.instance.doctor = Doctor.objects.get(user=self.request.user)
         return super().form_valid(form)
+
 
 class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Blog
-    fields = ['title', 'categories', 'overview']
+    fields = ['title', 'categories', 'overview', 'image', 'summary']
 
     def form_valid(self, form):
-        form.instance.user = Doctor.objects.get(user=self.request.user)
+        form.instance.doctor = Doctor.objects.get(user=self.request.user)
         return super().form_valid(form)
+
 
     def test_func(self):
         blog = self.get_object()
-        if self.request.user == blog.user:
+        if self.request.user == blog.doctor.user:
             return True
         return False
+
+
 
 
 class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Blog
-    success_url = '/'
+    success_url = reverse_lazy('blog')
 
     def test_func(self):
         blog = self.get_object()
-        if self.request.user == blog.user:
+        if self.request.user == blog.doctor.user:
             return True
         return False
 
 
-        
+
+
+class CustomUserBlogListView(ListView):
+    model = Blog
+    template_name = 'pages/user_blog.html' 
+    context_object_name = 'blog_post'
+    paginate_by = 5
+
+    def get_queryset(self):
+        user = get_object_or_404(CustomUser, username=self.kwargs.get('username'))
+        return Blog.objects.filter(doctor=user.doctor).order_by('-timestamp')
+      
+
 
 def lab(request):
-    return render(request, 'pages/lab.html', {})
+    context = {
+        'all_lab_test':Lab.objects.all(),
+   
+    }
+    return render(request, 'pages/lab.html', context)
 
 
 

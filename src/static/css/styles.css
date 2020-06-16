@@ -11169,8 +11169,6 @@ h5,
 
 .ftco-facts {
     padding: 8em 0;
-    width: 100%;
-    height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -11191,7 +11189,7 @@ h5,
 }
 
 .ftco-facts .subheading {
-    margin-bottom: 20px !important;
+    margin-bottom: 10px !important;
 }
 
 .ftco-facts h2 span {

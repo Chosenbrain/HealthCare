@@ -8,7 +8,7 @@
 {% block content %}
 
      <br><p></p>
-<section class="ftco-section bg-light" id="blog-section">
+ <section class="ftco-section bg-light" id="blog-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
           <div class="col-md-10 heading-section text-center ftco-animate">
@@ -16,66 +16,51 @@
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
           </div>
         </div>
-
-
-      <div class="container">
-         <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-lg-8 ftco-animate">
-           {% for blog in queryset %}
-            <h2 class="text-center">{{ blog.title }}</h2>
-            <div class="meta mb-3 text-center">
-           <div><h6><span><a href = "">written By {{ blog.user }}</span>{{ blog.id }}  <small class="date"><i class="icon-clock"></i>  {{  blog.timestamp|timesince }} ago</small><a/></h6>
-           
+   {% if user.doctor %}
+  <a class="btn btn-outline-danger center button" href="{% url 'blog-create' %}">Create a Blog</a>
+       {% else %}
+       {% endif %}
+       <br><p></p>
+        <div class="row d-flex">
+         {% for blog in blog_post %}
+          <div class="col-md-4 ftco-animate">
+            <div class="blog-entry "> 
+              <a href="{% url 'blog-detail' blog.id %}" class="block-20" style="background-image: url({{ blog.image.url }})"></a>
+              <div class="text d-block">
+              	<div class="meta mb-3">
+                  <div>{{ blog.timestamp|timesince }} ago</div>
+                  <div><a href="{% url 'user-blog' blog.doctor.user.username %}">Written By {{ blog.doctor.user.username }}</a></div>
+                  <div><a href="#" class="meta-chat"><span class="icon-eye"></span>{{ blog.view_count }}</a></div>
+                </div>
+                <h3 class="heading"><a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a></h3>
+                <p>{{ blog.summary }}</p>
+                <p><a href="{% url 'blog-detail' blog.id %}" class="btn btn-primary py-2 px-3">Read more</a></p>
+              </div>
             </div>
-            </div>
-           <div><small class="icon-eye text-danger">{{ blog.view_count }}</small></div> 
-          
-          <div class="meta mb-3 text-center">
-          
-          <h5>{% for cat in blog.categories.all %}<span class="btn btn-dark">{{ cat }}</span> {% endfor %}</h5>
-          
-          </div>
-         
-           <p class="text-center">{{ blog.overview }}</p>
-            {% endfor %}
-               
-            <nav aria-label="pagination">
-                <ul class="pagination pagination-circle pg-blue">
-                 {% if queryset.has_previous %}
-                <li class="page-item"><a href= "?{{ page_request_var }}={{ queryset.previous_page_number }}"  class="page-link">Previous</a></li>
-                 {% endif %}
-               
-                    <li class="page-item active"><a href= "?{{ page_request_var }}={{ queryset.number }}" class="page-link">{{ queryset.number }}</a></li>
-                   </a>
-                  </li>
-               {% if queryset.has_next %}
-              <li class="page-item"><a  href= "?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link">Next</a></li>
-                {% endif %}
-           </ul>
-           </nav>
-               {% if is_paginated %}
-              <nav aria-label="pagination">
-                <ul class="pagination pagination-circle pg-blue">
-                 {% if queryset.has_previous %}
-                <li class="page-item"><a href= "?{{ page_request_var }}={{ queryset.previous_page_number }}"  class="page-link">Previous</a></li>
-                 {% endif %}
-               
-                    <li class="page-item active"><a href= "?{{ page_request_var }}={{ queryset.number }}" class="page-link">{{ queryset.number }}</a></li>
-                   </a>
-                  </li>
-               {% if queryset.has_next %}
-              <li class="page-item"><a  href= "?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link">Next</a></li>
-                {% endif %}
-           </ul>
-           </nav>
-           {% endif %}
-            </div>
-            </div>
-        </div>
+        	</div>
+          {% endfor %}
+        </div> 
       </div>
     </section>
-		
+    {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-5' and num < page_obj.number|add:'5' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
 {% endblock content  %}
-
-  
-

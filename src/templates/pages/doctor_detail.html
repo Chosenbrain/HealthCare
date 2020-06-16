@@ -4,39 +4,38 @@
 {% load static %}
 {% block title %}Doctor's profile{% endblock title %}
 
-	{% block meta %} Our Doctors {% endblock meta %}
+	{% block meta %} {{ doctor.user.username }} Profile {% endblock meta %}
 {% block content %}
 		<br><p></p>
 	  <br><p></p>	
     <br><p></p>
 	  <br><p></p>
 
-
   <div class="media-body">
-  <legend class=" mb-4 h3 center text-center">{{ user.username }}</legend>
+  <legend class=" mb-4 h3 center text-center">{{ doctor.user.username  }}</legend>
     </div>
   <div class="media">
-      <img class="center" style="width:300px;height:300px;" src="{{ user.profile.image.url }}">
+      <img class="center" style="width:300px;height:300px;" src="{{ doctor.user.image.url }}">
     </div>
     <br> 
       <div class="content-section text-center">
       <div class="media-body">
       <legend class="border-bottom mb-4 h4 center">My Specialities</legend>
-        <p class="text-info h6">{{ user.profile.speciality }}</p>
+        <p class="text-info h6">{{ doctor.user.speciality }}</p>
         <br>
         <legend class="border-bottom mb-4 h4 center">My Contact</legend>
-        <p class="text-danger h6">{{ user.email }}</p>
+        <p class="text-danger h6">{{ doctor.user.email }}</p>
     </div>
+     <br>
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
          <fieldset class="form-group">
-             <legend class="border-bottom mb-4 h4 center">My Bio</legend>
-           <p class="text-dark h6">{{ user.profile.bio }}</p>
+             <legend class="border-bottom mb-4 h4">My Bio</legend>
+           <p class="text-dark h6">{{ user.doctor.bio }}</p>
          </fieldset>
          <div class="form-group text-center center">
          {{ u_form|crispy }}
-         {{ p_form|crispy }}
-          <button class="btn btn-outline-info" type="submit">Update</button>
+         {{ d_form|crispy }}
          </div>
      </form>
    

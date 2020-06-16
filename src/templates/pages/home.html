@@ -32,7 +32,7 @@
 			          <div class="col-md-12 heading-section ftco-animate p-4 p-lg-5">
 			            <h2 class="mb-4">We Are <span>Jazeera</span> A Medical Clinic</h2>
 			            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-			            <p><a href="#" class="btn btn-primary py-3 px-4">Make an appointment</a> <a href="#" class="btn btn-secondary py-3 px-4">Contact us</a></p>
+			            <p><a href="{% url 'appointment' %}" class="btn btn-primary py-3 px-4">Make an appointment</a> <a href="{% url 'contact' %}" class="btn btn-secondary py-3 px-4">Contact us</a></p>
 			          </div>
 			        </div>
 		        </div>
@@ -46,8 +46,8 @@
 				<div class="row justify-content-center">
 					<div class="col-md-9 text-center">
 						<h2>Your Health is Our Priority</h2>
-						<p>We can manage your dream building A small river named Duden flows by their place</p>
-						<p class="mb-0"><a href="#" class="btn btn-white px-4 py-3">Search Places</a></p>
+						<p>We made everything easier for you, just click to request for our home services, we want you to know that w have you covered</p>
+						<p class="mb-0"><a href="{% url 'lab' %}" class="btn btn-white px-4 py-3">Home Service</a></p>
 					</div>
 				</div>
 			</div>
@@ -192,7 +192,7 @@
 					<div class="col-md-5 heading-section heading-section-white">
 						<span class="subheading">Fun facts</span>
 						<h2 class="mb-4">Over 5,100 patients trust us</h2>
-						<p class="mb-0"><a href="#" class="btn btn-secondary px-4 py-3">Make an appointment</a></p>
+						<p class="mb-0"><a href="{% url 'doctor' %}" class="btn btn-secondary px-4 py-3">Consult a Doctor</a></p>
 					</div>
 					<div class="col-md-7">
 						<div class="row pt-4">
@@ -229,7 +229,7 @@
 		            </div>
 		          </div>
 	          </div>
-					</div>
+				</div>
 				</div>
 			</div>
 		</section>
@@ -237,8 +237,8 @@
 
 		
  
-    
-	<section class="hero-wrap ftco-services testimony-section img" style="background-image: url({% static 'images/test.jpg)' %}">
+    <p></p><br>
+	<section class="hero-wrap ftco-section testimony-section img" style="background-image: url({% static 'images/test.jpg)' %}">
     	<div class="overlay"></div>
       	<div class="container">
         <div class="row justify-content-center pb-3">

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser,Doctor
+from .models import CustomUser,Doctor,Patient
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -30,3 +30,7 @@ class DoctorUpdateForm(forms.ModelForm):
         model = Doctor
         fields = ['image', 'speciality', 'bio']
 
+class PatientUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = [ 'subscribe' ]
