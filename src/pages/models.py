@@ -18,20 +18,19 @@ class Lab(models.Model):
 
     
 class Category(models.Model):
-    title= models.CharField(max_length=50)
+    category= models.CharField(max_length=50)
 
 
     def __str__(self):
-        return self.title
+        return self.category
 
 
 
 class Blog(models.Model):
     title = models.CharField(max_length=100)
     overview = models.TextField()
-    categories = models.ManyToManyField(Category)
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
-    view_count = models.IntegerField(default = 0)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     image = models.ImageField()
     summary = models.TextField(max_length=150)
@@ -54,6 +53,24 @@ class Blog(models.Model):
         return reverse('blog-detail', kwargs={'pk': self.pk})
 
 
+
+class Pricing(models.Model):
+    plans = models.CharField(max_length=250)
+    amount = models.CharField(max_length=250)
+    service = models.CharField(max_length=250)
+
+  
+    def __str__(self):
+        return self.plans
+
+class Pricingservice(models.Model):
+    pricing = models.ForeignKey(Pricing, default=None, on_delete=models.CASCADE)
+    services = models.CharField(max_length=250)
+
+    
+
+    def __str__(self):
+        return self.pricing.plans
 
 
 

@@ -13,15 +13,21 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Blog,Lab
+from .models import Blog,Lab,Pricing,Pricingservice
 from users.models import Doctor,CustomUser
 
 
 
 
-class HomePageView(TemplateView):
-    
+class HomePageView(ListView):
+    model = Pricing
     template_name = 'pages/home.html'
+    
+  
+
+
+
+
 
 
 class AboutPageView(TemplateView):
@@ -31,7 +37,30 @@ class AboutPageView(TemplateView):
 
 @login_required
 def appointment(request):
-    return render(request, 'pages/appointment.html', {})
+    if request.method == "POST":
+        message_name = request.POST['message_name']
+        message_email = request.POST['message_email']
+        message_service = request.POST.get('message_service', False)
+        message_plan = request.POST['message_plan']
+        message_date = request.POST['message_date']
+        message_time = request.POST['message_time']
+        message = request.POST['message']
+
+        send_mail(
+            'message from ' + message_name,
+            message,
+            message_service,
+            message_plan,
+            message_date,
+            message_time,
+            message_email,
+            ['exactmusty1994@gmail.com', 'jazeera@gmail.com'],
+            fail_silently=False,
+        )
+        return render(request, 'pages/appointment.html', {'message_name': message_name})
+    else:
+    
+        return render(request, 'pages/appointment.html', {})
 
 
 def contact(request):
@@ -63,11 +92,12 @@ def doctor(request):
 
 
 def blog(request):
-    
-    context = {
-        'blog_post': Blog.objects.all()
+    context={
+        'blog_post':  Blog.objects.all()
     }
+
     return render(request, 'pages/blog.html', context)
+       
 
 class BlogListView(ListView):
     model = Blog

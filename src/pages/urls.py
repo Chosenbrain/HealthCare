@@ -7,6 +7,7 @@ from .views import (BlogCreateView,
                     BlogDeleteView,
                     BlogListView,
                     CustomUserBlogListView
+                    
                     )
 from .views import HomePageView, AboutPageView, appointment, lab, contact, doctor
 

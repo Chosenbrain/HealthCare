@@ -27,7 +27,6 @@
             <div><h6><span><a href="{% url 'user-blog' object.doctor.user.username %}">written By {{ object.doctor.user.username  }}</a></span><small class="date"><i class="icon-clock"></i>  {{  object.timestamp|timesince }} ago</small><a></a></h6>
             </div>
             </div>
-            <div><small class="icon-eye text-danger">{{ object.view_count }}</small></div> 
           <div class="meta mb-3 text-center">
           <h5>{% for cat in object.categories.all %}<span class="btn btn-dark">{{ cat }}</span> {% endfor %}</h5>
           </div>

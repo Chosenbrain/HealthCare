@@ -10,7 +10,24 @@
         {% csrf_token %}
         <fieldset class="form-group ">
             <legend class="border-bottom mb-4 h2">Blog Post</legend>
-            {{ form|crispy }}
+            <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.title|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+            
+            {{ form.categories|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.image|as_crispy_field }}
+            </div>
+            </div>
+                <div class="form-group col-md-12 mb-0">
+                {{ form.overview|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-12 mb-0">
+                {{ form.summary|as_crispy_field }}
+                </div>
         </fieldset>
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Post</button>
@@ -19,3 +36,4 @@
     </form>
     </div>
 {% endblock content %}
+      

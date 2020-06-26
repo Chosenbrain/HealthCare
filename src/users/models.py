@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from PIL import Image
+import uuid 
 
 
 class CustomUser(AbstractUser):
@@ -22,12 +23,22 @@ class Status(models.Model):
 
 
 class Doctor(models.Model):
+    GENDER_CHOICES = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, related_name="doctor")
     image = models.ImageField(default='jazeera.jpg', upload_to='profile_pics')
+    full_name = models.CharField(max_length=100)
     bio = models.TextField()
     speciality = models.CharField(max_length=300)
     describtion = models.CharField(max_length=100)
     status = models.ManyToManyField(Status)
+    gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
+    location = models.CharField(max_length=100)
+    certification = models.CharField(max_length=300)
+    place_of_work = models.CharField(max_length=300)
+    
 
 
 
@@ -43,14 +54,21 @@ class Doctor(models.Model):
 
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
-            img.thumbnail(output_size)
+            img.image(output_size)
             img.save(self.image.path)
 
 
 
+
 class Patient(models.Model):
+    STATE_CHOICES=(
+        (True, u'Yes'),
+        (False, u'No'),
+    )
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, related_name="patient")
-    subscribe = models.BooleanField(default=False)
+    subscribe = models.BooleanField(default=False, choices=STATE_CHOICES)
+    plan_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True, help_text="Unique ID for every particular patient for every profile")
+   
 
     def __str__(self):
         return f'{self.user.username}'

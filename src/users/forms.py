@@ -17,18 +17,18 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 
-class UserUpdateForm(forms.ModelForm):
+class CustomUserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 
     class Meta:
-        model = User
-        fields = ['username', 'email']
+        model = CustomUser
+        fields = ['email']
 
 
 class DoctorUpdateForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ['image', 'speciality', 'bio']
+        fields = ['full_name', 'gender', 'location', 'certification', 'place_of_work', 'image', 'speciality', 'bio']
 
 class PatientUpdateForm(forms.ModelForm):
     class Meta:

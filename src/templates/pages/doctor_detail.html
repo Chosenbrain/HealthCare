@@ -8,38 +8,62 @@
 {% block content %}
 		<br><p></p>
 	  <br><p></p>	
-    <br><p></p>
-	  <br><p></p>
+    
+<header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+       <img class="center img-responsive img-circle" style="width:300px;height:300px;" src="{{ doctor.image.url }}">
+				<hr>
+				<h1 class="tm-title">Hi, I am {{ doctor.full_name }}</h1>
+			</div>
+		</div>
+	</div>
+  
+</header>
 
-  <div class="media-body">
-  <legend class=" mb-4 h3 center text-center">{{ doctor.user.username  }}</legend>
-    </div>
-  <div class="media">
-      <img class="center" style="width:300px;height:300px;" src="{{ doctor.user.image.url }}">
-    </div>
-    <br> 
-      <div class="content-section text-center">
-      <div class="media-body">
-      <legend class="border-bottom mb-4 h4 center">My Specialities</legend>
-        <p class="text-info h6">{{ doctor.user.speciality }}</p>
+<!-- about and skills section -->
+<section class="container text-center">
+	<div class="row">
+		<div class="col-md-6 col-sm-12">
+			<div class="about">
+				<h3 class="accent">My Biography</h3>
         <br>
-        <legend class="border-bottom mb-4 h4 center">My Contact</legend>
-        <p class="text-danger h6">{{ doctor.user.email }}</p>
-    </div>
-     <br>
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-         <fieldset class="form-group">
-             <legend class="border-bottom mb-4 h4">My Bio</legend>
-           <p class="text-dark h6">{{ user.doctor.bio }}</p>
-         </fieldset>
-         <div class="form-group text-center center">
-         {{ u_form|crispy }}
-         {{ d_form|crispy }}
-         </div>
-     </form>
+				<p>{{ doctor.bio }}</p>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="skills">
+				<h2 class="white">Field of expertise</h2>
+				<strong>{{ doctor.speciality }}</strong>
+			</div>
+		</div>
+	</div>
+
+  	<div class="col-md-8 col-sm-12">
+			<div class="education">
+				<h2 class="white">Certification</h2>
+        	<div class="education-school">
+					  <span><h5>{{ doctor.certification }}</h5></span>
+							</div>
+					<div class="education-content">
+						<h4 class="education-title accent">{{ doctor.gender }}</h4>
+					</div>
+			</div>
+		</div>
+
+    	<div class="col-md-4 col-sm-12">
+			<div class="contact">
+				<h2>Contact</h2>
+					<p><i class="fa fa-map-marker"></i> {{ doctor.location }}</p>
+					<p><i class="fa fa-envelope"></i>{{ doctor.user.email }}</p>
+			</div>
+		</div>
+
+		</div>
+	</div>
    
-</div>
- 
+  </section>
 
 {% endblock content %}
+

@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'crispy_forms',
     'debug_toolbar',
+    
 
     # Local
     'users.apps.UsersConfig',
@@ -152,6 +153,8 @@ INTERNAL_IPS = ['127.0.0.1']
 # https://docs.djangoproject.com/en/dev/topics/auth/customizing/#substituting-a-custom-user-model
 AUTH_USER_MODEL = 'users.CustomUser'
 
+
+
 # DJANGO-ALLAUTH CONFIGS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
@@ -172,3 +175,5 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+

@@ -23,7 +23,7 @@
        {% endif %}
        <br><p></p>
         <div class="row d-flex">
-         <h1 class="mb-3 text-center"> {{ view.kwargs.username }} has {{ page_obj.paginator.count }} Post</h1>
+         <h1 class="mb-3 "> {{ view.kwargs.username }} has {{ page_obj.paginator.count }} Post</h1>
          {% for blog in blog_post %}
           <div class="col-md-4 ftco-animate">
             <div class="blog-entry "> 

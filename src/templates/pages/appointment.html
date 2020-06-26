@@ -82,16 +82,26 @@
 			        </div>
 			      </div>
 		      </div>
-		      <div class="col-md-5 d-flex">
+			 
+								
+				<div class="col-md-5 d-flex">
 	        	<div class="appointment-wrap bg-danger p-5 d-flex align-items-center">
-		        	<form action="home.html" class="appointment-form ftco-animate">
+		        	<form action="{% url 'appointment' %}" class="appointment-form ftco-animate"  method="post">
+					{% csrf_token %}
+					 {% if message_name %}
+						<center>
+						<h1>Thanks {{ message_name }}</h1>
+						<p>we will get back to you shortly</p>
+						</center>
+						{% else %}
 		        		<h3>Free Consultation</h3>
 		    				<div class="">
 			    				<div class="form-group">
-			    					<input type="text" class="form-control" placeholder="First Name">
+								
+			    					<input type="text" name="message_name" class="form-control" placeholder="Username">
 			    				</div>
 			    				<div class="form-group">
-			    					<input type="text" class="form-control" placeholder="Last Name">
+			    					<input type="email" name="message_email" class="form-control" placeholder="Email">
 			    				</div>
 		    				</div>
 		    				<div class="">
@@ -99,49 +109,59 @@
 			    					<div class="form-field">
 	          					<div class="select-wrap">
 	                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                      <select name="kane" id="harry" class="form-control">
+	                      <select name="message_service" id="harry" class="form-control">
 	                      	<option value="">Select Your Services</option>
-	                        <option value="">Neurology</option>
-	                        <option value="">Cardiology</option>
-	                        <option value="">Dental</option>
-	                        <option value="">Ophthalmology</option>
+	                        <option value="">Family medicine consultant</option>
+	                        <option value="">Nursing specialist</option>
+	                        <option value="">gynaecologist</option>
+							<option value="">general nurse</option>
+	                        <option value="">midwife</option>
 	                        <option value="">Other Services</option>
 	                      </select>
 	                    </div>
 			              </div>
 			    				</div>
+								{% if user.patient.plan_id %}
 		    					<div class="form-group">
-			    					<input type="text" class="form-control" placeholder="plan Id">
+								<small>please provide your given plan id, when you subscribed</small>
+			    					<input type="id" name="message_plan" class="form-control" placeholder="plan Id">
 			    				</div>
+								{% endif %}
 		    				</div>
 		    				<div class="d-md-flex">
  				<div class="form-group">
 				<div class="input-wrap">
 				<div class="icon"><span class="ion-md-calendar"></span></div>
-					<input type="text" class="form-control appointment_date" placeholder="Date">
+					<input type="text" name="message_date" class="form-control appointment_date" placeholder="Date">
 				</div>
 					</div>
+	
 						<div class="form-group ml-md-4">
 					 	<div class="input-wrap">
 						<div class="icon"><span class="ion-ios-clock"></span></div>
-							<input type="text" class="form-control appointment_time" placeholder="Time">
+							<input type="text" name="message_time" class="form-control appointment_time" placeholder="Time">
 						</div>
 						</div>
 						</div>
 		    		<div class="">
 		    			<div class="form-group">
-			              <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+			              <textarea type="text" name="message" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
 			            </div>
 			            <div class="form-group">
 			              	<input type="submit" value="Appointment" class="btn btn-secondary py-3 px-4">
 			            </div>
 		    				</div>
+						{% endif %}
 		    			</form>
+				
 		    		</div>
+					
 	        </div>
-		    </div>
-			</div>
-		</section>
-    
+		
+		</div>
+		
+	</div>
+		
+	</section>
    	{% endblock content %}
 	
