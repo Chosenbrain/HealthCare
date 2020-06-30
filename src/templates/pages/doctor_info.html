@@ -15,7 +15,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-       <img class="center img-responsive img-circle" style="width:300px;height:300px;" src="{{ user.doctor.image.url }}">
+       <img class="center img-responsive img-circle"src="{{ user.doctor.image.url }}">
 				<hr>
 				<h1 class="tm-title">Hi, I am {{ user.doctor.full_name }}</h1>
 			</div>
@@ -37,6 +37,7 @@
 		<div class="col-md-6 col-sm-12">
 			<div class="skills">
 				<h2 class="white">Field of expertise</h2>
+				<br>
 				<strong>{{ user.doctor.speciality }}</strong>
 			</div>
 		</div>

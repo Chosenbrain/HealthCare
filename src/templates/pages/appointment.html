@@ -121,28 +121,25 @@
 	                    </div>
 			              </div>
 			    				</div>
-								{% if user.patient.plan_id %}
 		    					<div class="form-group">
-								<small>please provide your given plan id, when you subscribed</small>
 			    					<input type="id" name="message_plan" class="form-control" placeholder="plan Id">
 			    				</div>
-								{% endif %}
+							
 		    				</div>
-		    				<div class="d-md-flex">
- 				<div class="form-group">
-				<div class="input-wrap">
-				<div class="icon"><span class="ion-md-calendar"></span></div>
-					<input type="text" name="message_date" class="form-control appointment_date" placeholder="Date">
-				</div>
-					</div>
-	
-						<div class="form-group ml-md-4">
-					 	<div class="input-wrap">
-						<div class="icon"><span class="ion-ios-clock"></span></div>
-							<input type="text" name="message_time" class="form-control appointment_time" placeholder="Time">
-						</div>
-						</div>
-						</div>
+		    					<div class="d-md-flex">
+		    				<div class="form-group">
+		    					<div class="input-wrap">
+		            		<div class="icon"><span class="ion-md-calendar"></span></div>
+		            		<input type="text" class="form-control appointment_date" placeholder="Date">
+	            		</div>
+		    				</div>
+		    				<div class="form-group ml-md-4">
+		    					<div class="input-wrap">
+		            		<div class="icon"><span class="ion-ios-clock"></span></div>
+		            		<input type="text" class="form-control appointment_time" placeholder="Time">
+	            		</div>
+		    				</div>
+	    				</div>
 		    		<div class="">
 		    			<div class="form-group">
 			              <textarea type="text" name="message" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>

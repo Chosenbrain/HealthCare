@@ -41,12 +41,24 @@
 		                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
 		                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
 		              </ul>
-		              <p><a href="#" class="btn btn-primary">Consult</a></p>
+					
+					  {% if not user.patient.subscribe %}
+					  <p><a href="{% url 'pricing' %}" class="btn btn-primary">Subscribe to Consult</a></p>
+					  {% else %}
+					    {% if not user.doctor %}
+		              <p><a href="{% url 'chat' %}" class="btn btn-primary">Consult</a></p>
+					   {% else %}
+					   {% if not doctor == doc.doctor %}
+					<p><a href="{% url 'chat' %}" class="btn btn-primary">Talk to a Patient</a></p>
+					  {% endif %}
+					   {% endif %}
+					   {% endif %}
+					  
 	              </div>
 					</div>
 						</div>
 					</div>
-					 {% endfor %}
+					{% endfor %}
 				</div>
 			</div>
 		</section>

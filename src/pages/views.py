@@ -24,7 +24,10 @@ class HomePageView(ListView):
     template_name = 'pages/home.html'
     
   
-
+class PricingPageView(ListView):
+    model = Pricing
+    template_name = 'pages/pricing.html'
+    
 
 
 
@@ -86,6 +89,13 @@ def doctor(request):
         
     }
     return render(request, 'pages/doctor.html', context)
+
+
+
+@login_required
+def chat(request):
+    return render(request, 'pages/chat.html', {})
+
 
 
 

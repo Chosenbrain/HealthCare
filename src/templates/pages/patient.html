@@ -19,7 +19,7 @@
          </fieldset>
          <div class="form-group text-center center">
     {% if not user.patient.subscribe %}
-    <button class="btn btn-outline-info" type="submit">Subscribe</button>
+    <button class="btn btn-outline-info" type="submit"><a href="{% url 'pricing' %}">Subscribe</a></button>
 {% else %}
   <button class="btn btn-danger" disabled type="submit">Subscribed</button>
   <p>Thanks For Subscribing to Jazeera this is your Plan ID: <span class="h6 text-primary">{{ user.patient.plan_id }}</span> </p>
