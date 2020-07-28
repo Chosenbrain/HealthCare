@@ -1,7 +1,9 @@
 from django.db import models
+from config.utils import unique_slug_generator
 from users.models import Doctor
 from django.urls import reverse
 from PIL import Image
+from django.db.models.signals import pre_save
 
 
 
@@ -34,6 +36,7 @@ class Blog(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     image = models.ImageField()
     summary = models.TextField(max_length=150)
+    slug = models.SlugField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -49,9 +52,22 @@ class Blog(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-    def get_absolute_url(self):
-        return reverse('blog-detail', kwargs={'pk': self.pk})
 
+            def get_absolute_url(self):
+                return reverse('blog-detail', kwargs={'pk': self.slug})
+
+
+
+
+def slug_generator(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+pre_save.connect(slug_generator, sender=Blog)
+
+
+
+   
 
 
 class Pricing(models.Model):

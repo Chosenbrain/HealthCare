@@ -6,14 +6,16 @@
 
 {% block meta %} the best medical-service website in Abuja {% endblock meta %}
 {% block content %}
-
+    <br><p></p>
+     <br><p></p>
+     <br><p></p>
      <br><p></p>
     <section class="ftco-section bg-light" id="blog-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
           <div class="col-md-10 heading-section text-center ftco-animate">
             <h2 class="mb-4">Gets Every Single Updates Here</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+            <p>We give you the best opportunity to read about each and every health blog for indeed we are at your service</p>
           </div>
         </div>
 
@@ -24,7 +26,7 @@
           
             <h2 class="text-center">{{ object.title }}</h2>
             <div class="meta mb-3 text-center">
-            <div><h6><span><a href="{% url 'user-blog' object.doctor.user.username %}">written By {{ object.doctor.user.username  }}</a></span><small class="date"><i class="icon-clock"></i>  {{  object.timestamp|timesince }} ago</small><a></a></h6>
+            <div><h6><span><a href="{% url 'doctor-detail'  object.doctor.user.username %}"> Written By: {{ object.doctor.user.username  }}</a></span><small class="date"><i class="icon-clock"></i>  {{  object.timestamp|timesince }} ago</small><a></a></h6>
             </div>
             </div>
           <div class="meta mb-3 text-center">
@@ -32,8 +34,8 @@
           </div>
             <p class="text-center">{{ object.overview }}</p>
             {% if blog.doctor == user.doctor %}
-            <a class="btn btn-secondary btn-sm mt mb-2" href="{% url 'blog-update' blog.id %}">Update</a>
-            <a class="btn btn-danger btn-sm mt mb-2" href="{% url 'blog-delete' blog.id %}">Delete</a>
+            <a class="btn btn-secondary btn-sm mt mb-2" href="{% url 'blog-update' blog.slug %}">Update</a>
+            <a class="btn btn-danger btn-sm mt mb-2" href="{% url 'blog-delete' blog.slug %}">Delete</a>
             {% endif %}
             </div>
             </div>

@@ -22,7 +22,7 @@
 	    				<div class="row justify-content-start pb-3">
 			          <div class="col-md-12 heading-section ftco-animate p-4 p-lg-5">
 			            <h2 class="mb-4">We Are <span>Jazeera</span> A Medical Clinic</h2>
-			            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+			            <p>we are here for you to be responded to, you just need to make an appointment with any medical assistance you prefer but if unfortunately you can't find what you needed you can probably contact us immediately <span class="href"><a href="{% url 'contact' %}">here</span></a> because we probably have everything in Care</p>
 			            <p><a href="{% url 'blog' %}" class="btn btn-primary py-3 px-4">Visit Our Blog</a> <a href="{% url 'lab' %}" class="btn btn-secondary py-3 px-4">Home Service</a></p>
 			          </div>
 			        </div>
@@ -48,7 +48,7 @@
 			              <div class="icon justify-content-center align-items-center d-flex"><span class="flaticon-ambulance"></span></div>
 			              <div class="media-body pl-md-4">
 			                <h3 class="heading mb-3">Emergency Services</h3>
-			                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+			               <p>This is the reason we are been powerful and easier to patronize, you can contact us for emergency purpose.</p>
 			              </div>
 			            </div>      
 			          </div>
@@ -57,7 +57,7 @@
 			              <div class="icon justify-content-center align-items-center d-flex"><span class="flaticon-doctor"></span></div>
 			              <div class="media-body pl-md-4">
 			                <h3 class="heading mb-3">Qualified Doctors</h3>
-			                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+			               <p>There you are, you are probably thinking since its an online hospital they wont have a qualified doctors, that you need to check to comfirm our services.</p>
 			              </div>
 			            </div>      
 			          </div>
@@ -66,16 +66,16 @@
 			              <div class="icon justify-content-center align-items-center d-flex"><span class="flaticon-stethoscope"></span></div>
 			              <div class="media-body pl-md-4">
 			                <h3 class="heading mb-3">Outdoors Checkup</h3>
-			                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+			                <p>here comes why we created the E-health-care  no other E-health-care does this, the Home Service,its cheap easier and quick.</p>
 			              </div>
-			            </div>      
+			            </div>  
 			          </div>
 			          <div class="col-md-6 d-flex align-self-stretch ftco-animate">
 			            <div class="media block-6 services d-flex">
 			              <div class="icon justify-content-center align-items-center d-flex"><span class="flaticon-24-hours"></span></div>
 			              <div class="media-body pl-md-4">
 			                <h3 class="heading mb-3">24 Hours Service</h3>
-			                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+			                <p>we have over 25 employees working for jazeera, so as to make life easier for you, we want you to be hospitalize at home</p>
 			              </div>
 			            </div>      
 			          </div>
@@ -98,10 +98,10 @@
 		    				<div class="">
 			    				<div class="form-group">
 								
-			    					<input type="text" name="message_name" class="form-control" placeholder="Username">
+			    					<input type="text" name="message_name" class="form-control" placeholder="Username" required>
 			    				</div>
 			    				<div class="form-group">
-			    					<input type="email" name="message_email" class="form-control" placeholder="Email">
+			    					<input type="email" name="message_email" class="form-control" placeholder="Email" required>
 			    				</div>
 		    				</div>
 		    				<div class="">
@@ -109,7 +109,7 @@
 			    					<div class="form-field">
 	          					<div class="select-wrap">
 	                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                      <select name="message_service" id="harry" class="form-control">
+	                      <select name="message_service" id="harry" class="form-control" required>
 	                      	<option value="">Select Your Services</option>
 	                        <option value="">Family medicine consultant</option>
 	                        <option value="">Nursing specialist</option>
@@ -122,7 +122,7 @@
 			              </div>
 			    				</div>
 		    					<div class="form-group">
-			    					<input type="id" name="message_plan" class="form-control" placeholder="plan Id">
+			    					<input type="id" name="message_plan" class="form-control" placeholder="plan Id" required >
 			    				</div>
 							
 		    				</div>
@@ -130,19 +130,19 @@
 		    				<div class="form-group">
 		    					<div class="input-wrap">
 		            		<div class="icon"><span class="ion-md-calendar"></span></div>
-		            		<input type="text" class="form-control appointment_date" placeholder="Date">
+		            		<input type="text" name="message_date" class="form-control appointment_date" placeholder="Date" required>
 	            		</div>
 		    				</div>
 		    				<div class="form-group ml-md-4">
 		    					<div class="input-wrap">
 		            		<div class="icon"><span class="ion-ios-clock"></span></div>
-		            		<input type="text" class="form-control appointment_time" placeholder="Time">
+		            		<input type="text" name="message_time" class="form-control appointment_time" placeholder="Time" required>
 	            		</div>
 		    				</div>
 	    				</div>
 		    		<div class="">
 		    			<div class="form-group">
-			              <textarea type="text" name="message" id="" cols="30" rows="2" class="form-control" placeholder="Message"></textarea>
+			              <textarea type="text" name="message" id="" cols="30" rows="2" class="form-control" placeholder="Message" required></textarea>
 			            </div>
 			            <div class="form-group">
 			              	<input type="submit" value="Appointment" class="btn btn-secondary py-3 px-4">

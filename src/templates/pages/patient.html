@@ -10,14 +10,14 @@
 	  <br><p></p>	
     <br><p></p>
 	  <br><p></p>
-     
+	  <br><p></p>	
 	  <form method="POST">
         {% csrf_token %}
          <fieldset class="form-group">
-             <legend class="border-bottom mb-4 h4 text-center center">Your Email</legend>
-           <legend class=" mb-4 h3 center text-center">{{ user.email }}</legend>
+             <legend class="border-bottom mb-4 h4 text-center">Your Email</legend>
+           <legend class=" mb-4 h3 text-center">{{ user.email }}</legend>
          </fieldset>
-         <div class="form-group text-center center">
+         <div class="form-group text-center">
     {% if not user.patient.subscribe %}
     <button class="btn btn-outline-info" type="submit"><a href="{% url 'pricing' %}">Subscribe</a></button>
 {% else %}
@@ -26,4 +26,7 @@
 {% endif %}
          </div>
       </form>
+
+    <br><p></p>
+	  <br><p></p>	
 {% endblock content %}

@@ -31,7 +31,7 @@
 	    				<div class="row justify-content-start pb-3">
 			          <div class="col-md-12 heading-section ftco-animate p-4 p-lg-5">
 			            <h2 class="mb-4">We are <span>Jazeera</span>, a Medical Clinic</h2>
-			            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+			            <p>Believe it or not Jazeera is a leading home clinic,must you go to the hospital before you get yourself diagnosed for those that uses jazeera no,but if you never uses jazeera then am sorry you've missed alot, enough is enough you wont get to the hospital to get yourself treated.</p>
 			            <p><a href="{% url 'appointment' %}" class="btn btn-primary py-3 px-4">Make an appointment</a> <a href="{% url 'contact' %}" class="btn btn-secondary py-3 px-4">Contact us</a></p>
 			          </div>
 			        </div>
@@ -63,7 +63,7 @@
 					</div>
 						<div class="media-body p-2 mt-3">
 								<h3 class="heading">Qualitfied Doctors</h3>
-								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+								<p>There you are, you are probably thinking since its an online hospital they wont have a qualified doctors, that you need to check to comfirm our services.</p>
 							</div>
 						</div>
 						</div>
@@ -74,7 +74,7 @@
 			</div>
 				<div class="media-body p-2 mt-3">
 					<h3 class="heading">Emergency Care</h3>
-					<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+					<p>This is the reason we are been powerful and easier to patronize, you can contact us for emergency purpose.</p>
 				</div>
 				</div>
 				</div>
@@ -85,7 +85,7 @@
 				</div>
 				<div class="media-body p-2 mt-3">
 					<h3 class="heading">Outdoor Checkup</h3>
-					<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+					<p>here comes why we created the E-health-care  no other E-health-care does this, the Home Service,its cheap easier and quick.</p>
 				</div>
 				</div>
 				</div>
@@ -96,23 +96,22 @@
 		</div>
 		<div class="media-body p-2 mt-3">
 		<h3 class="heading">24 Hours Service</h3>
-		<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+		<p>we have over 25 employees working for jazeera, so as to make life easier for you, we want you to be hospitalize at home</p>
 		</div>
 			</div>
 			</div>
 		</div>
 	</div>
 </section>
-
+           
 	<section class="ftco-services ftco-departments bg-light">
     		<div class="row justify-content-center my-5 pb-2">
           <div class="col-md-8 text-center heading-section ftco-animate">
-          	<span class="subheading">Pricing</span>
             <h2 class="mb-4">Our Pricing</h2>
-            <p>Separated they live in. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
+            <p>Most expecially you have to test to comfirm,we are ready to serve you,care for you,thats why we provide you the best </p>
           </div>
         </div>
-		
+		 {% if user.is_authenticated %}
     		<div class="row">
 			 {% for p in object_list %}
         	<div class="col-md-3 ftco-animate">
@@ -125,9 +124,9 @@
 					<p class="button text-center"><a href="#" class="btn btn-primary px-4 py-3">Get Offer</a></p>
         	
 			 {% for service  in p.pricingservice_set.all %}
- 			<div class="alert text-dark glyphicon glyphicon-exclamation-ok" role="alert">
-			    <p> {{ service.services }}</p>
-							</div>	
+ 			
+			 <p> {{ service.services }}</p>
+							
 			 {% endfor %}
 			
 				</div>
@@ -135,10 +134,11 @@
 			
         	</div>
 			{% endfor %}
+			
         </div>
 		
     	</div>
-			
+			{% endif %}
     </section>
 
 
@@ -152,7 +152,7 @@
 					<div class="col-md-5 heading-section heading-section-white">
 						<span class="subheading">Fun facts</span>
 						<h2 class="mb-4">Over 5,100 patients trust us</h2>
-						<p class="mb-0"><a href="{% url 'doctor' %}" class="btn btn-secondary px-4 py-3">Consult a Doctor</a></p>
+						<p class="mb-0"><a href="{% url 'doctors' %}" class="btn btn-secondary px-4 py-3">Consult a Doctor</a></p>
 					</div>
 					<div class="col-md-7">
 						<div class="row pt-4">
@@ -218,9 +218,11 @@
                     </span>
                  
                   <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Jeff Freshman</p>
-                    <span class="position">Patients</span>
+                    <p class="mb-4">At first,i thought to myself nothing will make me use an online healthcare,because we are all Nigerians, but i tried it and i definitely love it 
+
+.</p>
+                    <p class="name">Abiola Gboyega</p>
+                    <span class="position">Patient</span>
                   </div>
                 </div>
               </div>
@@ -232,9 +234,9 @@
                     </span>
                   
                   <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Jeff Freshman</p>
-                    <span class="position">Patients</span>
+                    <p class="mb-4">To be honest ever since i started using jazeera i forgot about going to the hospital, i do get prescribtion from the doctors here thanks to jazeera.</p>
+                    <p class="name">Blessing Ugo</p>
+                    <span class="position">Patient</span>
                   </div>
                 </div>
               </div>
@@ -246,9 +248,9 @@
                     </span>
                
                   <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Jeff Freshman</p>
-                    <span class="position">Patients</span>
+                    <p class="mb-4">i am a diabetic patient for 13 years, i do get to meet doctors with different prescribtions but immediately i consult a doctor here in jazeera i got my diabetics controlled by the drugs brought to me by Jazeera.</p>
+                    <p class="name">Tobi Daniel</p>
+                    <span class="position">Patient</span>
                   </div>
                 </div>
               </div>
@@ -260,9 +262,9 @@
                     </span>
                  
                   <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Jeff Freshman</p>
-                    <span class="position">Patients</span>
+                    <p class="mb-4">many are called but few are the best, in Nigeria i recommend Jazeera, they saved me from my long term standing at the hospital just to see a doctor,they are the best to my problem.</p>
+                    <p class="name">Kareem Mustopha</p>
+                    <span class="position">Patient</span>
                   </div>
                 </div>
               </div>
@@ -274,9 +276,9 @@
                     </span>
                   
                   <div class="text px-4">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                    <p class="name">Jeff Freshman</p>
-                    <span class="position">Patients</span>
+                    <p class="mb-4">i encounter alot of disgrace at the hospital while waiting to see the doctor concerning my Seizure,i must see a doctor at least once a week sometimes my seizure do affect me while in the hospital, so now i have jazeera in my abode bringing my ordered drugs to me.</p>
+                    <p class="name">Victoria Olusegun</p>
+                    <span class="position">Patient</span>
                   </div>
                 </div>
               </div>

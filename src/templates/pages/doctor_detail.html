@@ -15,6 +15,7 @@
 			<div class="col-md-12 col-sm-12">
        <img class="center img-responsive img-circle" style="width:300px;height:300px;" src="{{ doctor.image.url }}">
 				<hr>
+				<br>
 				<h1 class="tm-title">Hi, I am {{ doctor.full_name }}</h1>
 			</div>
 		</div>
@@ -35,6 +36,7 @@
 		<div class="col-md-6 col-sm-12">
 			<div class="skills">
 				<h2 class="white">Field of expertise</h2>
+				<br>
 				<h3 class="subheading">Specialities:</h3>
 				<h5><strong class="text-white">{{ doctor.speciality }}</strong></h5>
 			</div>
@@ -47,6 +49,7 @@
         	<div class="education-school">
 					  <span><h5>{{ doctor.certification }}</h5></span>
 							</div>
+							<br>
 					<div class="education-content">
 					<h4 class="text-white">Gender</h4>
 						<h4 class="education-title accent">{{ doctor.gender }}</h4>
@@ -58,7 +61,14 @@
 			<div class="contact">
 				<h2>Contact</h2>
 					<p><i class="fa fa-map-marker"></i>Address: {{ doctor.location }}</p>
-					<p><i class="fa fa-envelope"></i>{{ doctor.user.email }}</p>
+						{% if not user.doctor %}
+					  {% if not user.patient.subscribe %}
+					  	<p><i class="fa fa-envelope"></i><a href="{% url 'pricing' %}" class="btn btn-primary">Subscribe to Message Me</a></p>
+					  {% else %}
+		            <p><i class="fa fa-envelope"></i><a href="{% url 'chat' %}" class="btn btn-primary">Message Me</a></p>
+					    {% endif %}
+						{% endif %}
+				
 			</div>
 		</div>
 

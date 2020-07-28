@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from PIL import Image
-import uuid 
+import uuid
 
 
 class CustomUser(AbstractUser):
@@ -31,7 +31,7 @@ class Doctor(models.Model):
     image = models.ImageField(default='jazeera.jpg', upload_to='profile_pics')
     full_name = models.CharField(max_length=100)
     bio = models.TextField()
-    speciality = models.CharField(max_length=300)
+    speciality = models.CharField(max_length=200)
     describtion = models.CharField(max_length=100)
     status = models.ManyToManyField(Status)
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
@@ -43,13 +43,15 @@ class Doctor(models.Model):
 
 
     def __str__(self):
-        return f'{self.user.username}'
+        return self.user.username
 
     
     def save(self):
         super().save()
 
+
         img = Image.open(self.image.path)
+
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
@@ -69,7 +71,7 @@ class Patient(models.Model):
    
 
     def __str__(self):
-        return f'{self.user.username}'
+        return self.user.username
     
 
 

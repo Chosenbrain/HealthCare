@@ -6,14 +6,16 @@
 
 {% block meta %} the best medical-service website in Abuja {% endblock meta %}
 {% block content %}
-
+     <br><p></p>
+     <br><p></p>
+     <br><p></p>
      <br><p></p>
  <section class="ftco-section bg-light" id="blog-section">
       <div class="container">
         <div class="row justify-content-center mb-5 pb-5">
           <div class="col-md-10 heading-section text-center ftco-animate">
             <h2 class="mb-4">Gets Every Single Updates Here</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+            <p>We give you the best opportunity to read about each and every health blog for indeed we are at your service</p>
           </div>
         </div>
    {% if user.doctor %}
@@ -25,15 +27,15 @@
          {% for blog in blog_post %}
           <div class="col-md-4 ftco-animate">
             <div class="blog-entry "> 
-              <a href="{% url 'blog-detail' blog.id %}" class="block-20" style="background-image: url({{ blog.image.url }})"></a>
+              <a href="{% url 'blog-detail' blog.slug %}" class="block-20" style="background-image: url({{ blog.image.url }})"></a>
               <div class="text d-block">
               	<div class="meta mb-3">
                   <div>{{ blog.timestamp|timesince }} ago</div>
                   <div><a href="{% url 'user-blog' blog.doctor.user.username %}">Written By {{ blog.doctor.user.username }}</a></div>
                 </div>
-                <h3 class="heading"><a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a></h3>
+                <h3 class="heading"><a href="{% url 'blog-detail' blog.slug %}">{{ blog.title }}</a></h3>
                 <p>{{ blog.summary }} </p>
-                <p><a href="{% url 'blog-detail' blog.id %}" class="btn btn-primary py-2 px-3">Read more</a></p>
+                <p><a href="{% url 'blog-detail' blog.slug %}" class="btn btn-primary py-2 px-3">Read more</a></p>
               </div>
             </div>
         	</div>

@@ -52,7 +52,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand mb-4 p-3 text-primary" href="{% url 'home' %}">Jazeera</a>
+	      <a class="navbar-brand mb-4 p-3 text-primary"  href="{% url 'home' %}"> <img src="{% static 'images/logo1.png' %}" alt="Jazeera Logo"></a>
 	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -75,9 +75,9 @@
               </form>
               {% endif %}
             <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"><span>Home</span></a></li>
-             <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link"><span>Health-Blog</span></a></li>
+            <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link"><span>Health-Blog</span></a></li>
 	          <li class="nav-item"><a href="{% url 'lab' %}" class="nav-link"><span>E-Lab</span></a></li>
-	          <li class="nav-item"><a href="{% url 'doctor' %}" class="nav-link"><span>Doctors</span></a></li>
+	          <li class="nav-item"><a href="{% url 'doctors' %}" class="nav-link"><span>Doctors</span></a></li>
 	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link"><span>Contact</span></a></li>
             <li class="nav-item cta mr-md-2"><a href="{% url 'appointment' %}" class="nav-link">Appointment</a></li>
             </div>
@@ -129,7 +129,7 @@
                 <li><a href="{% url 'home' %}"><span class="icon-long-arrow-right mr-2"></span>Home</a></li>
                 <li><a href="{% url 'about' %}"><span class="icon-long-arrow-right mr-2"></span>About</a></li>
                 <li><a href="{% url 'lab' %}"><span class="icon-long-arrow-right mr-2"></span>Home Services</a></li>
-                <li><a href="{% url 'doctor' %}"><span class="icon-long-arrow-right mr-2"></span>Doctors</a></li>
+                <li><a href="{% url 'doctors' %}"><span class="icon-long-arrow-right mr-2"></span>Doctors</a></li>
                 <li><a href="{% url 'blog' %}"><span class="icon-long-arrow-right mr-2"></span>Blog</a></li>
                 <li><a href="{% url 'pricing' %}"><span class="icon-long-arrow-right mr-2"></span>Subscriptions</a></li>
                 <li><a href="{% url 'contact' %}"><span class="icon-long-arrow-right mr-2"></span>Contact</a></li>
@@ -141,7 +141,7 @@
               <h2 class="ftco-heading-2">Services</h2>
               <ul class="list-unstyled">
                 <li><a href="{% url 'lab' %}"><span class="icon-long-arrow-right mr-2"></span>Emergency Services</a></li>
-                <li><a href="{% url 'doctor' %}"><span class="icon-long-arrow-right mr-2"></span>Qualified Doctors</a></li>
+                <li><a href="{% url 'doctors' %}"><span class="icon-long-arrow-right mr-2"></span>Qualified Doctors</a></li>
                 <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>Outdoors Checkup</a></li>
                 <li><a href="#"><span class="icon-long-arrow-right mr-2"></span>24 Hours Services</a></li>
               </ul>
@@ -151,10 +151,10 @@
             <div class="ftco-footer-widget mb-4">
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2348110492711</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope pr-4"></span><span class="text">info@yourdomain.com</span></a></li>
+	               <ul>
+	                <li><span class="icon icon-map-marker"></span><span class="text">No 9 bujumbura street off libraville wuse 2</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">07033541365</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope pr-4"></span><span class="text">jazeeraehealth@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
@@ -164,7 +164,7 @@
           <div class="col-md-12 text-center">
 	
        
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> Created By Chosenbrain Tech <i class="icon-heart color-danger" aria-hidden="true"></i> For <a href="https://jazzd.com" target="_blank">Jazeera</a>
+            <div class="text-dark">Copyright &copy;<script>document.write(new Date().getFullYear());</script> Created By Chosenbrain Tech <i class="icon-heart color-danger" aria-hidden="true"></i> For <a href="https://www.chosenbrain.com" target="_blank">Jazeera</a></div>
           </div>
         </div>
       </div>

@@ -4,10 +4,12 @@
 {% load static %}
 {% block title %}Doctor's profile{% endblock title %}
 
-	{% block meta %} Our Doctors {% endblock meta %}
+	{% block meta %} Our Doctor {% endblock meta %}
 {% block content %}
 
 		
+	  <br><p></p>	
+	  <br><p></p>
 	  <br><p></p>	
 	  <br><p></p>
 
@@ -15,7 +17,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-       <img class="center img-responsive img-circle"src="{{ user.doctor.image.url }}">
+       <img class="center img-responsive img-circle" style="width:300px;height:300px;" src="{{ user.doctor.image.url }}">
 				<hr>
 				<h1 class="tm-title">Hi, I am {{ user.doctor.full_name }}</h1>
 			</div>
@@ -38,6 +40,7 @@
 			<div class="skills">
 				<h2 class="white">Field of expertise</h2>
 				<br>
+				<h3 class="subheading">Specialities:</h3>
 				<strong>{{ user.doctor.speciality }}</strong>
 			</div>
 		</div>
@@ -45,10 +48,12 @@
 
   	<div class="col-md-8 col-sm-12">
 			<div class="education">
-				<h2 class="white">Certification</h2>
+				<h2 class="white">Certifications</h2>
         	<div class="education-school">
-					  <span><h5>{{ user.doctor.certification }}</h5></span>
+			 <span><h5>{{ user.doctor.certification }}</h5></span>
 							</div>
+							<br>
+							<h4 class="text-white">Gender</h4>
 					<div class="education-content">
 						<h4 class="education-title accent">{{ user.doctor.gender }}</h4>
 					</div>
@@ -58,15 +63,15 @@
     	<div class="col-md-4 col-sm-12">
 			<div class="contact">
 				<h2>Contact</h2>
-					<p><i class="fa fa-map-marker"></i> {{ user.doctor.location }}</p>
-					<p><i class="fa fa-envelope"></i>{{ user.email }}</p>
+					<p><i class="fa fa-map-marker"></i>Address: {{ user.doctor.location }}</p>
+					
 			</div>
 		</div>
 
 		</div>
 	</div>
 	<fieldset class="form-group">
-             <legend class="border-bottom mb-4 h4 text-danger">Edit Your Profile</legend>
+             <legend class="border-bottom mb-4 h4 text-danger haeding">Edit Your Profile</legend>
            <br>
         
    <form method="POST" enctype="multipart/form-data">

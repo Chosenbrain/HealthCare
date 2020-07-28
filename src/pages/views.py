@@ -23,7 +23,7 @@ class HomePageView(ListView):
     model = Pricing
     template_name = 'pages/home.html'
     
-  
+
 class PricingPageView(ListView):
     model = Pricing
     template_name = 'pages/pricing.html'
@@ -43,7 +43,7 @@ def appointment(request):
     if request.method == "POST":
         message_name = request.POST['message_name']
         message_email = request.POST['message_email']
-        message_service = request.POST.get('message_service', False)
+        message_service = request.POST['message_service']
         message_plan = request.POST['message_plan']
         message_date = request.POST['message_date']
         message_time = request.POST['message_time']
@@ -58,11 +58,9 @@ def appointment(request):
             message_time,
             message_email,
             ['exactmusty1994@gmail.com', 'jazeera@gmail.com'],
-            fail_silently=False,
         )
         return render(request, 'pages/appointment.html', {'message_name': message_name})
     else:
-    
         return render(request, 'pages/appointment.html', {})
 
 
@@ -73,7 +71,7 @@ def contact(request):
         message = request.POST['message']
 
         send_mail(
-            'messge from ' + message_name,
+            'message from ' + message_name,
             message,
             message_email,
             ['exactmusty1994@gmail.com', 'jazeera@gmail.com'],
@@ -82,13 +80,13 @@ def contact(request):
     else:
         return render(request, 'pages/contact.html', {})
 
-
-def doctor(request):
+@login_required
+def doctors(request):
     context = {
-        'doctor':Doctor.objects.all()
+        'doctors':Doctor.objects.all()
         
     }
-    return render(request, 'pages/doctor.html', context)
+    return render(request, 'pages/doctors.html', context)
 
 
 
@@ -111,7 +109,7 @@ def blog(request):
 
 class BlogListView(ListView):
     model = Blog
-    template_name = 'pages/blog.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'pages/blog.html' 
     context_object_name = 'blog_post'
     ordering = ['-timestamp']
     paginate_by = 5
@@ -119,10 +117,8 @@ class BlogListView(ListView):
 
 class BlogDetailView(DetailView):
     model = Blog
-    
 
-
-
+   
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
@@ -175,7 +171,7 @@ class CustomUserBlogListView(ListView):
         return Blog.objects.filter(doctor=user.doctor).order_by('-timestamp')
       
 
-
+@login_required
 def lab(request):
     context = {
         'all_lab_test':Lab.objects.all(),
