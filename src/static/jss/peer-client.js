@@ -1,4 +1,5 @@
-peerapp = (function() {
+peerapp =(function() {
+
     "use strict";
 
     console.log("Peer client started");
@@ -6,10 +7,17 @@ peerapp = (function() {
     var PEER_SERVER = "my-peer.herokuapp.com";
     var PORT = 443;
     var connectedPeers = {};
-    var myPeerID = generateRandomID(4);
+    
     var peer;
     var peerIdAlreadyTakenCount = 3;
+    const myScretCode ="JazeeraMed" ;
+    var myLength = 5 ;
+    var myPeerID = generateRandomID(myLength) ;
 
+
+    function checkMySecret(user){
+	  return  user.length>= (myScretCode.length*2+myLength) && user.slice(0,myScretCode.length)==myScretCode.toLowerCase() && user.split("").reverse().join("").slice(0,myScretCode.length)==myScretCode.split("").reverse().join("").toLowerCase()
+    }
     // Compatibility shim
     navigator.getUserMedia =
         navigator.getUserMedia ||
@@ -33,17 +41,19 @@ peerapp = (function() {
     }
     // var peer = new Peer({ host: 'my-peer.herokuapp.com', port: '443', path: '/', secure: true });
     // connectToServerWithId(myPeerID);
-    console.log(peer);
+    //console.log(peerId);
 
     initializeLocalMedia({ audio: true, video: true });
 
     // Generate random ID
     function generateRandomID(length) {
         var chars = "123456789abcdefghijklmnopqrstuvwxyz";
+	
         var result = "";
         for (var i = length; i > 0; --i)
             result += chars[Math.floor(Math.random() * chars.length)];
-        return result;
+        console.log(myScretCode,result.concat(myScretCode)) ;
+	return myScretCode+result+myScretCode;
     }
 
     // Data channel
@@ -128,7 +138,9 @@ peerapp = (function() {
                 rejectIncomingCall(call);
             } else {
                 window.incomingCall = call;
-                myapp.showIncomingCall(call.peer, call.options.metadata);
+		    console.log(call.peer) ;
+		if(!checkMySecret(call.peer)) rejectIncomingCall(call) ;
+                else myapp.showIncomingCall(call.peer, call.options.metadata);
             }
             // }
         });
@@ -171,7 +183,9 @@ peerapp = (function() {
     function connectToId(id) {
         if (!id || peer.disconnected) return;
         var requestedPeer = id;
-        if (!connectedPeers[requestedPeer]) {
+        //console.log(id) ;
+
+        if (!connectedPeers[requestedPeer] && checkMySecret(id)) {
             // Create 2 connections, one labelled chat and another labelled file.
             var c = peer.connect(requestedPeer, {
                 label: "chat",
@@ -231,24 +245,27 @@ peerapp = (function() {
 
         var options = { audio: true };
         if (isVideoCall) options["video"] = true;
-
+        if(checkMySecret(callerID)){
         initializeLocalMedia(options, function() {
             myapp.showVideoCall(options);
             var call = peer.call(callerID, window.localStream, { metadata: options });
             callConnect(call);
         });
+	}
     }
 
     function acceptIncomingCall() {
         var call = window.incomingCall;
         var metadata = call.options.metadata;
-        console.log(metadata);
-
+	    console.log(call) ;
+        console.log(metadata,call,"accepting call ");
+        if(checkMySecret(call.peer)){
         initializeLocalMedia(metadata, function() {
             call.answer(window.localStream);
             myapp.showVideoCall(metadata);
             callConnect(call);
         });
+	}
     }
 
     function rejectIncomingCall(reCall) {
@@ -300,14 +317,20 @@ peerapp = (function() {
         }
     };
 
+
     function fetchOnlinePeers() {
         $.ajax(
             "https://" + PEER_SERVER + "/peerjs/" + myPeerID + "/onlineusers"
         ).done(function(data) {
             // console.log(data);
             if (data.msg == "Success") {
-                data.users.splice(data.users.indexOf(myPeerID), 1);
-                myapp.updateOnlieUsers(data.users);
+//		    console.log(data.users) ;
+                    data.users.splice(data.users.indexOf(myPeerID), 1);
+                  //  console.log(data.users,data.users[1].reverse().slice(0,myScretCode.length)) ;
+
+		    data.users =data.users.filter(user=> checkMySecret(user))
+  //              console.log(data.users)
+			    myapp.updateOnlieUsers(data.users);
             }
         });
     }
@@ -316,6 +339,7 @@ peerapp = (function() {
     setInterval(function() {
         fetchOnlinePeers();
     }, 5000);
+	
 
     return {
         makeCall: makeCall,
