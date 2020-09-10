@@ -102,7 +102,9 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 
-"""from django.contrib.auth.models import AbstractUser
+""" i used this method to make it easier and cleaner for the custom user model
+
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver

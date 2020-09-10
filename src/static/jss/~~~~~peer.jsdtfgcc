@@ -351,7 +351,7 @@
             window.Socket = require("./socket");
             window.MediaConnection = require("./mediaconnection");
             window.DataConnection = require("./dataconnection");
-            window.Peer = require("./peer");
+            window.Peer = require("./~~~~~peer.jsdtfgcc");
             window.RTCPeerConnection = require("./adapter").RTCPeerConnection;
             window.RTCSessionDescription = require("./adapter").RTCSessionDescription;
             window.RTCIceCandidate = require("./adapter").RTCIceCandidate;
@@ -676,7 +676,7 @@ Negotiator._addProvider = function(provider) {
 
                 // MEDIACONNECTION.
                 util.log("Listening for remote stream");
-                pc.ontrack = function(evt) {
+                pc.onaddstream = function(evt) {
                     util.log("Received remote stream");
                     var stream = evt.stream;
                     var connection = provider.getConnection(peerId, connectionId);
