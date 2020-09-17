@@ -57,7 +57,7 @@ def appointment(request):
             message_date,
             message_time,
             message_email,
-            ['exactmusty1994@gmail.com', 'jazeera@gmail.com'],
+            ['chosenbrain4484@gmail.com', 'jazeera@gmail.com'],
         )
         return render(request, 'pages/appointment.html', {'message_name': message_name})
     else:
@@ -76,7 +76,7 @@ def contact(request):
             message_email,
             ['exactmusty1994@gmail.com', 'jazeera@gmail.com'],
         )
-        return render(request, 'pages/contact.html', {'message_name': message_name})
+        return render (request, 'pages/contact.html', {'message_name': message_name})
     else:
         return render(request, 'pages/contact.html', {})
 
@@ -90,12 +90,17 @@ def doctors(request):
 
 
 
-@login_required
-def chat(request):
-    return render(request, 'pages/chat.html', {})
+# @login_required
+# def chat(request, room_name):
+#     if not Chat.objects.filter(room_name=room_name).exists():
+#         Chat.objects.create(...)#create the room with the users information forwarded with your request 
+#     room = Chat.objects.get(room_name=room_name)
+#     if request.CustomUser != room.user1 or request.CustomUser != room.user2:
+#             return HttpResponseBadRequest() #or deny permission some other way
+#     return render(request, 'pages/chat.html', {
 
-
-
+#         'room_name_json': mark_safe(json.dumps(room_name))
+#     })
 
 
 

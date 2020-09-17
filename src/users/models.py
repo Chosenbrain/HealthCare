@@ -72,6 +72,13 @@ class Patient(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+# class Chat(models.Model):
+#     doctor = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, related_name = 'user1')
+#     patient = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, related_name = 'user2')
+#     room_name = models.CharField(max_length = 128, unique=True)
+
     
 
 

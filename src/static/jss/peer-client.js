@@ -10,11 +10,11 @@ peerapp = (function() {
 
     var peer;
     var peerIdAlreadyTakenCount = 3;
-    const myScretCode = "JazeeraMed";
-    var myLength = 5;
-    var myPeerID = generateRandomID(myLength);
+    const myScretCode = "JazeeraMed"; //secretcode   and keep this as small as possible      
+    var myLength = 2; //lengthofrandomchars      //you chnage here i dont understand this just add any number here
+    var myPeerID = generateRandomID(myLength); //generaterandomid  Wht about this ?
 
-
+    // I added this fn  .It checks if user is ours or not ,thats is userid have our secret at front and back .If yes its our user.
     function checkMySecret(user) {
         return user.length >= (myScretCode.length * 2 + myLength) && user.slice(0, myScretCode.length) == myScretCode.toLowerCase() && user.split("").reverse().join("").slice(0, myScretCode.length) == myScretCode.split("").reverse().join("").toLowerCase()
     }
@@ -53,7 +53,7 @@ peerapp = (function() {
         for (var i = length; i > 0; --i)
             result += chars[Math.floor(Math.random() * chars.length)];
         console.log(myScretCode, result.concat(myScretCode));
-        return myScretCode + result + myScretCode;
+        return myScretCode + result + myScretCode; //add ur secret at front and backop so that we can identify our users
     }
 
     // Data channel
@@ -317,20 +317,20 @@ peerapp = (function() {
         }
     };
 
-
+    //this fn fetches all the online users
     function fetchOnlinePeers() {
         $.ajax(
             "https://" + PEER_SERVER + "/peerjs/" + myPeerID + "/onlineusers"
         ).done(function(data) {
             // console.log(data);
             if (data.msg == "Success") {
-                //		    console.log(data.users) ;
+                console.log(data.users); //online users
                 data.users.splice(data.users.indexOf(myPeerID), 1);
                 //  console.log(data.users,data.users[1].reverse().slice(0,myScretCode.length)) ;
 
-                data.users = data.users.filter(user => checkMySecret(user))
+                data.users = data.users.filter(user => checkMySecret(user)) //we filter out our users from all users using the fn I showed at the top
                     //              console.log(data.users)
-                myapp.updateOnlieUsers(data.users);
+                myapp.updateOnlieUsers(data.users); //thats it ,then I added same chechusers fn when someone tries to cal you
             }
         });
     }
@@ -339,6 +339,7 @@ peerapp = (function() {
     setInterval(function() {
         fetchOnlinePeers();
     }, 5000);
+
 
 
     return {
